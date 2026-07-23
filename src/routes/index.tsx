@@ -1,100 +1,83 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, FileText, CalendarCheck, Search, MessagesSquare, Sparkles } from "lucide-react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aria — AI Workplace Productivity Assistant" },
-      { name: "description", content: "Automate drafting, summarizing, planning, and research. Five AI tools built for busy professionals." },
-      { property: "og:title", content: "Aria — Your AI Workplace Assistant" },
-      { property: "og:description", content: "Draft emails, summarize meetings, plan days, research topics, and chat with an AI copilot." },
+      { title: "Aria — Launching" },
+      { name: "description", content: "Aria is your AI workplace productivity assistant." },
+      { property: "og:title", content: "Aria" },
+      { property: "og:description", content: "AI workplace productivity assistant." },
     ],
   }),
-  component: Index,
+  component: Splash,
 });
 
-const tools = [
-  { to: "/email", icon: Mail, title: "Smart Email Generator", desc: "Draft professional emails with tone and audience controls." },
-  { to: "/summarize", icon: FileText, title: "Meeting Notes Summarizer", desc: "Turn raw notes into decisions, action items, and deadlines." },
-  { to: "/planner", icon: CalendarCheck, title: "AI Task Planner", desc: "Get a prioritized daily or weekly plan with time blocks." },
-  { to: "/research", icon: Search, title: "Research Assistant", desc: "Summarize topics with key insights and recommendations." },
-  { to: "/chat", icon: MessagesSquare, title: "AI Chat Assistant", desc: "Conversational copilot for any workplace question." },
-] as const;
+function Splash() {
+  const navigate = useNavigate();
+  const [phase, setPhase] = useState<"logo" | "name">("logo");
 
-function Index() {
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase("name"), 700);
+    const t2 = setTimeout(() => {
+      const onboarded = typeof window !== "undefined" && localStorage.getItem("aria.onboarded.v1");
+      navigate({ to: onboarded ? "/dashboard" : "/prepping" });
+    }, 2600);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [navigate]);
+
   return (
-    <div>
-      <section className="relative overflow-hidden px-6 pt-20 pb-16">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-1.5 text-xs font-medium text-muted-foreground">
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
-            AI Skill Accelerator Project · CAPACITI
-          </div>
-          <h1 className="text-5xl font-bold leading-[1.05] md:text-7xl">
-            Your AI copilot for{" "}
-            <span className="gradient-text">workplace productivity</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Aria automates the repetitive parts of your day — drafting emails, summarizing meetings,
-            planning tasks, and researching topics — so you can focus on the work that matters.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/chat"
-              className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-[1.03]"
-              style={{ background: "var(--gradient-hero)", boxShadow: "var(--shadow-glow)" }}
-            >
-              Try the assistant
-            </Link>
-            <Link
-              to="/email"
-              className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-6 py-3 text-sm font-semibold hover:bg-secondary/70"
-            >
-              Explore tools
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="mb-8 flex items-end justify-between">
-          <div>
-            <h2 className="text-2xl font-bold md:text-3xl">Five tools, one assistant</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Pick the workflow you want to speed up.</p>
-          </div>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {tools.map((t) => (
-            <Link
-              key={t.to}
-              to={t.to}
-              className="glass-card group relative overflow-hidden rounded-2xl p-6 transition-all hover:-translate-y-1 hover:border-primary/50"
-            >
-              <div
-                className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg text-primary-foreground"
-                style={{ background: "var(--gradient-hero)" }}
-              >
-                <t.icon className="h-5 w-5" />
-              </div>
-              <h3 className="text-lg font-semibold">{t.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
-              <span className="mt-4 inline-block text-xs font-medium text-accent group-hover:underline">
-                Open tool →
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        <div className="glass-card mt-10 rounded-2xl p-6 md:p-8">
-          <h3 className="text-lg font-semibold">Built with responsible AI in mind</h3>
-          <ul className="mt-3 grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
-            <li>• Every output includes a review-before-use reminder.</li>
-            <li>• Carefully engineered prompts for clarity and tone.</li>
-            <li>• Sensitive advice defers to qualified experts.</li>
-            <li>• No user data is stored — inputs go directly to the model.</li>
-          </ul>
-        </div>
-      </section>
+    <div
+      className="fixed inset-0 flex items-center justify-center overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(45deg, #04070F 0%, #04070F 35%, #0b3d2e 65%, #17a374 100%)",
+        backgroundSize: "200% 200%",
+        animation: "aria-bg 4s ease-in-out infinite alternate",
+      }}
+    >
+      <style>{`
+        @keyframes aria-bg {
+          0% { background-position: 0% 100%; }
+          100% { background-position: 100% 0%; }
+        }
+        @keyframes aria-pop {
+          0% { transform: scale(0.4); opacity: 0; }
+          60% { transform: scale(1.08); opacity: 1; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes aria-slide {
+          0% { transform: translateX(-24px); opacity: 0; letter-spacing: -0.4em; }
+          100% { transform: translateX(0); opacity: 1; letter-spacing: 0.06em; }
+        }
+      `}</style>
+      <div className="flex items-center gap-4">
+        <div
+          className="h-24 w-24 shadow-2xl"
+          style={{
+            borderRadius: 26,
+            background: "linear-gradient(135deg, #0b3d2e 0%, #17a374 100%)",
+            animation: "aria-pop 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards",
+            boxShadow: "0 20px 60px -10px rgba(23,163,116,0.5)",
+          }}
+        />
+        {phase === "name" && (
+          <span
+            className="text-6xl text-white"
+            style={{
+              fontFamily: "Sono, monospace",
+              fontWeight: 300,
+              animation: "aria-slide 0.9s cubic-bezier(0.22,1,0.36,1) forwards",
+              display: "inline-block",
+            }}
+          >
+            Aria
+          </span>
+        )}
+      </div>
     </div>
   );
 }
