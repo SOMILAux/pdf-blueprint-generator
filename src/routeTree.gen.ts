@@ -9,16 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as SummarizeRouteImport } from './routes/summarize'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PriorityRouteImport } from './routes/priority'
+import { Route as PreppingRouteImport } from './routes/prepping'
 import { Route as PlannerRouteImport } from './routes/planner'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as HelpRouteImport } from './routes/help'
 import { Route as EmailRouteImport } from './routes/email'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TaskIdRouteImport } from './routes/task.$id'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SummarizeRoute = SummarizeRouteImport.update({
   id: '/summarize',
   path: '/summarize',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResearchRoute = ResearchRouteImport.update({
@@ -26,14 +45,44 @@ const ResearchRoute = ResearchRouteImport.update({
   path: '/research',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PriorityRoute = PriorityRouteImport.update({
+  id: '/priority',
+  path: '/priority',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreppingRoute = PreppingRouteImport.update({
+  id: '/prepping',
+  path: '/prepping',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlannerRoute = PlannerRouteImport.update({
   id: '/planner',
   path: '/planner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmailRoute = EmailRouteImport.update({
   id: '/email',
   path: '/email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatRoute = ChatRouteImport.update({
@@ -46,63 +95,157 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TaskIdRoute = TaskIdRouteImport.update({
+  id: '/task/$id',
+  path: '/task/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/dashboard': typeof DashboardRoute
   '/email': typeof EmailRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
   '/planner': typeof PlannerRoute
+  '/prepping': typeof PreppingRoute
+  '/priority': typeof PriorityRoute
+  '/profile': typeof ProfileRoute
   '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
   '/summarize': typeof SummarizeRoute
+  '/tools': typeof ToolsRoute
+  '/task/$id': typeof TaskIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/dashboard': typeof DashboardRoute
   '/email': typeof EmailRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
   '/planner': typeof PlannerRoute
+  '/prepping': typeof PreppingRoute
+  '/priority': typeof PriorityRoute
+  '/profile': typeof ProfileRoute
   '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
   '/summarize': typeof SummarizeRoute
+  '/tools': typeof ToolsRoute
+  '/task/$id': typeof TaskIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/dashboard': typeof DashboardRoute
   '/email': typeof EmailRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
   '/planner': typeof PlannerRoute
+  '/prepping': typeof PreppingRoute
+  '/priority': typeof PriorityRoute
+  '/profile': typeof ProfileRoute
   '/research': typeof ResearchRoute
+  '/settings': typeof SettingsRoute
   '/summarize': typeof SummarizeRoute
+  '/tools': typeof ToolsRoute
+  '/task/$id': typeof TaskIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/email' | '/planner' | '/research' | '/summarize'
+  fullPaths:
+    | '/'
+    | '/chat'
+    | '/dashboard'
+    | '/email'
+    | '/help'
+    | '/history'
+    | '/planner'
+    | '/prepping'
+    | '/priority'
+    | '/profile'
+    | '/research'
+    | '/settings'
+    | '/summarize'
+    | '/tools'
+    | '/task/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/email' | '/planner' | '/research' | '/summarize'
+  to:
+    | '/'
+    | '/chat'
+    | '/dashboard'
+    | '/email'
+    | '/help'
+    | '/history'
+    | '/planner'
+    | '/prepping'
+    | '/priority'
+    | '/profile'
+    | '/research'
+    | '/settings'
+    | '/summarize'
+    | '/tools'
+    | '/task/$id'
   id:
     | '__root__'
     | '/'
     | '/chat'
+    | '/dashboard'
     | '/email'
+    | '/help'
+    | '/history'
     | '/planner'
+    | '/prepping'
+    | '/priority'
+    | '/profile'
     | '/research'
+    | '/settings'
     | '/summarize'
+    | '/tools'
+    | '/task/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChatRoute: typeof ChatRoute
+  DashboardRoute: typeof DashboardRoute
   EmailRoute: typeof EmailRoute
+  HelpRoute: typeof HelpRoute
+  HistoryRoute: typeof HistoryRoute
   PlannerRoute: typeof PlannerRoute
+  PreppingRoute: typeof PreppingRoute
+  PriorityRoute: typeof PriorityRoute
+  ProfileRoute: typeof ProfileRoute
   ResearchRoute: typeof ResearchRoute
+  SettingsRoute: typeof SettingsRoute
   SummarizeRoute: typeof SummarizeRoute
+  ToolsRoute: typeof ToolsRoute
+  TaskIdRoute: typeof TaskIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/summarize': {
       id: '/summarize'
       path: '/summarize'
       fullPath: '/summarize'
       preLoaderRoute: typeof SummarizeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/research': {
@@ -112,6 +255,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/priority': {
+      id: '/priority'
+      path: '/priority'
+      fullPath: '/priority'
+      preLoaderRoute: typeof PriorityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prepping': {
+      id: '/prepping'
+      path: '/prepping'
+      fullPath: '/prepping'
+      preLoaderRoute: typeof PreppingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/planner': {
       id: '/planner'
       path: '/planner'
@@ -119,11 +283,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlannerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/email': {
       id: '/email'
       path: '/email'
       fullPath: '/email'
       preLoaderRoute: typeof EmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chat': {
@@ -140,16 +325,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/task/$id': {
+      id: '/task/$id'
+      path: '/task/$id'
+      fullPath: '/task/$id'
+      preLoaderRoute: typeof TaskIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChatRoute: ChatRoute,
+  DashboardRoute: DashboardRoute,
   EmailRoute: EmailRoute,
+  HelpRoute: HelpRoute,
+  HistoryRoute: HistoryRoute,
   PlannerRoute: PlannerRoute,
+  PreppingRoute: PreppingRoute,
+  PriorityRoute: PriorityRoute,
+  ProfileRoute: ProfileRoute,
   ResearchRoute: ResearchRoute,
+  SettingsRoute: SettingsRoute,
   SummarizeRoute: SummarizeRoute,
+  ToolsRoute: ToolsRoute,
+  TaskIdRoute: TaskIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
