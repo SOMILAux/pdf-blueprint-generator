@@ -2,7 +2,7 @@
 
 ## Overview
 
-Aria is an AI-powered productivity assistant designed to help users automate repetitive daily tasks, improve organization, and increase productivity. The application combines task management with artificial intelligence, enabling users to generate professional/formal emails, summarize meeting notes, plan schedules, conduct research, and interact with an AI chatbot from one centralized platform.
+Aria is an AI-powered workplace productivity assistant designed to help users automate repetitive daily tasks, improve organization, and increase productivity. The application combines task management with artificial intelligence, enabling users to generate professional emails, summarize meeting notes, plan schedules, conduct research, and interact with an AI chatbot from one centralized platform.
 
 The application is designed with a modern dark-themed interface, providing an intuitive and user-friendly experience for professionals, students, educators, and businesses.
 
