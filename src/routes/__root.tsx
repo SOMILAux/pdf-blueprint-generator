@@ -12,6 +12,7 @@ import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { BottomNav } from "../components/BottomNav";
 
 function NotFoundComponent() {
   return (
@@ -77,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Sono:wght@200;300;400;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -100,52 +101,14 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-function Header() {
-  const nav = [
-    { to: "/", label: "Home" },
-    { to: "/email", label: "Email" },
-    { to: "/summarize", label: "Summarize" },
-    { to: "/planner", label: "Planner" },
-    { to: "/research", label: "Research" },
-    { to: "/chat", label: "Chat" },
-  ] as const;
-
-  return (
-    <header className="sticky top-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg" style={{ background: "var(--gradient-hero)" }} />
-          <span className="font-display text-lg font-semibold">Aria</span>
-        </Link>
-        <nav className="hidden gap-1 md:flex">
-          {nav.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              activeProps={{ className: "rounded-md px-3 py-1.5 text-sm text-foreground bg-secondary" }}
-              activeOptions={{ exact: true }}
-            >
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </header>
-  );
-}
-
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <Header />
-      <main>
+      <main className="pb-16">
         <Outlet />
       </main>
-      <footer className="mt-16 border-t border-border/50 py-8 text-center text-xs text-muted-foreground">
-        <p>Aria uses AI. Always verify important outputs. Built for the CAPACITI AI Skill Accelerator.</p>
-      </footer>
+      <BottomNav />
       <Toaster theme="dark" position="top-right" richColors />
     </QueryClientProvider>
   );
