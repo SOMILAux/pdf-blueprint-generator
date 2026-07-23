@@ -6,8 +6,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Aria — Launching" },
       { name: "description", content: "Aria is your AI workplace productivity assistant." },
-      { property: "og:title", content: "Aria" },
-      { property: "og:description", content: "AI workplace productivity assistant." },
+      { property: "og:title", content: "Aria — Launching" },
+      { property: "og:description", content: "Aria is your AI workplace productivity assistant." },
     ],
   }),
   component: Splash,
